@@ -23,15 +23,29 @@ function App() {
 
   const swap=(e)=>{
     e.preventDefault();
-    // data=useCurrencyInfo(toCurrency); // no need hook re runs automatically when fromCurrency changes
     setFromCurrency(toCurrency);
     setToCurrency(fromCurrency);
-    setAmount(convertedAmount);
-    setConvertedAmount(amount);
+    setAmount(convertedAmount === undefined ? '' : String(convertedAmount));
+    setConvertedAmount(amount === undefined ? '' : String(amount));
   }
 
-  const onAmountChange=(e)=>{
-    setAmount(e.target.value)
+  const onAmountChange=(e)=>{ // still values changing on conntinuos swaps
+    const value = e.target.value;
+    // Allow only up to 5 decimal places
+    
+
+    // i can still optimise more to avoid extra symbols
+    if (value.includes('.')) {
+      if(value.split('.').length>2){ // i optimised more as i might still had multiple decimals in input but now handled
+        value=value.replace(/\.+$/,''); // remove extra decimals at end
+      }
+      const [intPart, decPart] = value.split('.');
+      if (decPart.length > 5) {
+        setAmount(intPart + '.' + decPart.slice(0, 5));
+        return;
+      }
+    }
+    setAmount(value);
   }
   const onCurrencyChange=(e)=>{
     if(e.target.name==='currency From'){
@@ -43,9 +57,13 @@ function App() {
   }
 
   const convert=useCallback(() => {
-  if (!data[toCurrency]) return;
-  setConvertedAmount(Number(amount) * Number(data[toCurrency]));
-}, [amount, data, toCurrency]);
+    if (!data[toCurrency] || amount === '' || isNaN(Number(amount))) {
+      setConvertedAmount('');
+      return;
+    }
+    const result = Number(amount) * Number(data[toCurrency]);
+    setConvertedAmount(isNaN(result) ? '' : result.toFixed(5));
+  }, [amount, data, toCurrency]);
   useEffect( // only include this to auto convert when any dependency changes
     ()=>{
       convert();
