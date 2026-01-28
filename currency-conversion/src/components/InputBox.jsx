@@ -20,8 +20,8 @@ function InputBox(
 
   return (
     <>
-      <div className={`flex flex-wrap gap-4 items-center bg-amber-200 rounded  ${className}`}>
-            <div className='flex flex-col gap-2'>
+      <div className={`flex flex-wrap gap-x-64 items-center bg-yellow-400 rounded h-40 ${className}`}>
+            <div className=' px-4 flex flex-col gap-2'>
                     <label htmlFor={amountId} className='color-black font-semibold'>
                         {label}
                     </label>
@@ -37,7 +37,7 @@ function InputBox(
                     {
                         currencyOptions.map((option)=>(
                             <option key={option} value={option}>
-                                {option}
+                                {option.toUpperCase()}
                             </option>
                         ))
                     }
@@ -48,4 +48,4 @@ function InputBox(
   )
 }
 
-export default InputBox
+export default InputBox;
