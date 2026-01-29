@@ -5,6 +5,6 @@ function useGithubInfo(userName) {
         const data = await response.json();
         return data;
     };
-    return { loadUserInfo };
+    return loadUserInfo;
 }
 export default useGithubInfo;

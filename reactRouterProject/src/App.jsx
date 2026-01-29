@@ -12,6 +12,7 @@ import About from './components/about/About.jsx';
 import User from './components/user/User.jsx';
 import GitHub from './components/github/GitHub.jsx';
 import ContactUs from './components/contact-us/ContactUs.jsx';
+import { useGithubInfo } from './components/index.js';
 
 function App() {
   const router=createBrowserRouter(
@@ -20,7 +21,7 @@ function App() {
         <Route path='' element={<Home/>}/>
         <Route path='about' element={<About/>}/>
         <Route path='user/:userId' element={<User/>}/>
-        <Route path='github' element={<GitHub/>}/>
+        <Route path='github' loader={useGithubInfo("Garvansh247")} element={<GitHub/>}/>
         <Route path='contactus' element={<ContactUs/>}/>
       </ Route>
     )
