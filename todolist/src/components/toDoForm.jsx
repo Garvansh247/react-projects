@@ -14,7 +14,7 @@ function ToDoForm(){
                         e.preventDefault();
                         const trimmed = toDoText.trim();
                         if (!trimmed) return;
-                        addToDo({ toDoText: trimmed, isCompleted: false });
+                        addToDo({ toDoText: trimmed, isCompleted: false, showError: false });
                         setToDoText("");
                     }}
                     className="flex flex-col md:flex-row gap-4 bg-gray-200 p-4 rounded"
