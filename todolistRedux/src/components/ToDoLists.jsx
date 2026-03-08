@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { toggleTodoCompletion,setUpdateTodo,removeTodo } from "../features/todos/todosSlice";
 import { useSelector, useDispatch } from "react-redux";
 
-function ToDoUpdate() {
+function ToDoLists() {
     const todos = useSelector((state) => state.todos.todos);
     const dispatch = useDispatch();
 
@@ -64,4 +64,4 @@ function ToDoUpdate() {
         </div>
     );
 }
-export default ToDoUpdate;
+export default ToDoLists;
